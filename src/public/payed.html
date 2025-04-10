@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanks for Your Payment</title>
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+        --text-color: #1f2937;
+        --light-gray: #f3f4f6;
+        --border-color: #d1d5db;
+        --success-color: #10b981;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+          Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+
+      body {
+        background-color: #f9fafb;
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      .thank-you-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+      }
+
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        background-color: var(--success-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+      }
+
+      .success-icon svg {
+        width: 40px;
+        height: 40px;
+        fill: white;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+      }
+
+      .message {
+        color: #6b7280;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .order-number {
+        background-color: var(--light-gray);
+        padding: 0.75rem;
+        border-radius: 4px;
+        margin-bottom: 2rem;
+        font-family: monospace;
+        font-size: 1.1rem;
+        color: var(--text-color);
+        display: inline-block;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        text-decoration: none;
+      }
+
+      .button:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .button-secondary {
+        background-color: white;
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        margin-left: 0.75rem;
+      }
+
+      .button-secondary:hover {
+        background-color: var(--light-gray);
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 480px) {
+        .thank-you-container {
+          padding: 2rem 1.5rem;
+        }
+        
+        .buttons {
+          flex-direction: column;
+        }
+        
+        .button {
+          width: 100%;
+          margin-left: 0;
+          margin-bottom: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thank-you-container">
+      <div class="success-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+        </svg>
+      </div>
+      
+      <h1>Thank You for Your Payment!</h1>
+      
+      <p class="message">
+        Your transaction has been completed successfully. 
+        A confirmation email has been sent to your registered email address.
+      </p>
+      
+      <div class="order-number">
+        Order #: Loading...
+      </div>
+      
+      <div class="buttons">
+        <a href="/" class="button">Return to Home</a>
+        <a href="/orders" class="button button-secondary">View Orders</a>
+      </div>
+    </div>
+    
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const orderElement = document.querySelector('.order-number');
+        
+        // Obtener el parámetro orderId de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
+        
+        // Mostrar el paypal_order_id si existe, de lo contrario mostrar un mensaje por defecto
+        if (orderId) {
+          orderElement.textContent = `Order #: ${orderId}`;
+        } else {
+          orderElement.textContent = `Order #: Not Available`;
+        }
+      });
+    </script>
+  </body>
+</html>
